@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Digital Humanities</title>
+    <meta charset="utf-8">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="pygments.css" type="text/css" />
+    <style>
+
+      th {color: white; background-color: black; padding-top: 7px; padding-bottom: 7px;}
+      td {padding: 3px; }
+      table { width: 100%; border-collapse: collapse;}
+      td, th {border: 1px solid black; font-size: 95%; text-align: center;
+      }
+      body {
+        font-family: 'Helvetica Neue', 'Arial', 'sans-serif';
+        color: rgba(34,34,34,.77);
+      }
+      .remark-slide-content h1 {
+          font-size: 45px;
+      }
+      h1 {
+        font-family: 'Helvetica Neue', 'Arial', 'sans-serif';
+        font-weight: normal;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        color: black;
+        font-variant: small-caps;
+      }
+      h2 {
+        font-family: 'Helvetica Neue', 'Arial', 'sans-serif';
+        font-weight: normal;
+        color: black;
+        margin-top: 5px;
+        margin-bottom: 5px;
+      }
+      h3, h4 {
+        font-size: 115%;
+        color: rgba(34,34,34,.77);
+        font-weight: normal;
+        margin-top: 5px;
+        margin-bottom: 5px;
+      }
+      p {
+        margin-top: 1px;
+        margin-bottom: 1px;
+      }
+      .youtube {
+        width: 100%;
+        height: 45vh;
+      }
+      .middle {
+        
+        background-image: linear-gradient(#E1E1E1, #68AA5E 45%);
+      }
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+
+
+class: middle
+
+# Text Analysis Methods Workshop 2: Using a Jupyter Notebook, Basic Python, an Example Script
+
+### 
+
+<hr>
+Matthew J. Lavin
+
+Clinical Assistant Professor of English and Director of Digital Media Lab
+
+University of Pittsburgh
+
+September 2018
+
+---
+class: middle
+
+### Open a Jupyter Notebook
+<hr>
+#### For this part of the assignment, simply launch Jupyter using Anaconda Browser as we did last class. Click "New" and then "Python 3" to load a new notebook.
+
+---
+class: middle
+
+### Tab, spaces, and newline syntax
+
+<hr>
+#### Python uses a new line (hitting the enter key) to mark the end of a code statement. Often, sub-commands are indented one tab (or four spaces). There's some disagreement about which is better, spaces or tabs, but the main thing is not to switch back and fourth between them. (See <a href="https://www.datacamp.com/community/tutorials/pep8-tutorial-python-code">https://www.datacamp.com/community/tutorials/pep8-tutorial-python-code</a> and <a href="https://www.codecademy.com/courses/learn-python/lessons/python-syntax/">https://www.codecademy.com/courses/learn-python/lessons/python-syntax/</a> for more information.)
+---
+class: middle
+
+### Variables
+<hr>
+#### Variables are values that can change, depending on conditions or on information passed to the program. All programming languages have them. They allow you to set a value in one moment and use that value later by invoking the variable name. Variable names are up to the user. Computers are not intuitive about variable names, so you have to call the variable exactly as you have set it. (See <a href="https://www.codecademy.com/courses/learn-python/lessons/python-syntax/exercises/variables">https://www.codecademy.com/courses/learn-python/lessons/python-syntax/exercises/variables</a>.) Try typing this bit of code in a Jupyter Notebook cell, then press the "Run" button:
+  
+<div class="hlcode">
+<div class="syntax"><pre>
+<span class="n">h</span> <span class="o">=</span> <span class="s2">&quot;Hello World!&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
+</pre></div></div>
+
+#### This is a "Hello World!" statement. Writing one is a rite-of-passage in learning to code. In this case, h is a variable, and the text "Hello World!" is the value that h points to.
+
+---
+class: middle
+### Strings, integers, and floats
+<hr>
+#### "Hello World!" is also a string, which means Python recognizes it and treats it as text. Python can also recognize integers, which are whole numbers, and floats, which are numbers with decimals. To understand the differences, try running the following statements in your notebook:
+
+<div class="hlcode">
+<div class="syntax"><pre>
+
+<span></span><span class="nb">print</span><span class="p">(</span><span class="mi">9</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span>
+
+</pre></div></div>
+<div class="hlcode">
+<div class="syntax"><pre>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;9&quot;</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span>
+
+</pre></div></div>
+
+<div class="hlcode">
+<div class="syntax"><pre>
+
+<span class="nb">print</span><span class="p">(</span><span class="mf">9.0</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span>
+
+</pre></div>
+</div>
+
+---
+class: middle
+
+### Lists
+<hr>
+#### All programming languages have ways of collecting mutiple variables so that your program can be instructed to do the same thing over and over again to a group of things (files, rows of data, etc.). Lists are Python's most important structure because the language is designed to make it easy to "loop" through them. (More on loops next week.) A list is a collection which is ordered and changeable. That means we can do things like this:
+
+<div class="hlcode">
+<div class="syntax"><pre><span></span><span class="n">mylist</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">mylist</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="n">mylist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;hi&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">mylist)</span>
+</pre></div>
+</div>
+---
+class: middle
+
+### Tuples
+
+<hr>
+
+#### Tuples are ordered but not changeable. This means that the 'append' function will raise an error:
+
+<div class="hlcode">
+<div class="syntax"><pre><span></span><span class="n">mytuple</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">mytuple</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="n">mytuple</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;hi&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">mytuple</span><span class="p">)</span>
+</pre></div>
+</div>
+
+---
+class: middle
+### Dictionaries
+
+#### Dictionaries are unordered, changeable, and unindexed. They consist of something called "key/value" pairs, which are important in almost any programming language. They allow you set a value and look it up later using a a string name, which makes them even more flexible than variables on their own. For example:
+
+<div class="hlcode">
+<div class="syntax"><pre><span></span><span class="n">mydict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;coke&quot;</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;sprite&quot;</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;root beer&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">}</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">mydict</span><span class="p">[</span><span class="s2">&quot;sprite&quot;</span><span class="p">])</span>
+</pre></div>
+
+</div>
+---
+class: middle
+
+#### This ability to store values will come in very handy when we do text analysis. We can do things like generate a dictionary of terms and their counts without knowing which terms are in a document beforehand, or store other values for each term like its part-of-speech or its number of syllables. Dictionary lookups are also very fast because the items the dictionary can be reordered by the program to access them as efficiently as possible. But try to remember that the items in a dictionary have no implicit order! This will matter as we go forward.
+
+---
+class: middle
+
+### Integrating Jupyter and Github
+<hr>
+### Fork the Repository
+<hr>
+#### Forking a repo copies it to your Github account, which will give you permission to edit your version of that repo. To try this out, go to <a href="https://github.com/dh-fall-2018/zotero_script">https://github.com/dh-fall-2018/zotero_script</a> and click the "Fork" button in the upper right-hand corner. A window will pop up asking "Where should we fork this repository?" Choose your account.
+
+---
+class: middle
+
+### Git clone a repo
+<hr>
+#### Once a repo is forked to your account, you have download a copy to your computer. To do this, open Github Desktop, click "clone a repository", and find the repiository called <yourusername>/zotero_script in the list of repos you can clone. Click the "clone" button, and the program will copy the repo to a folder located at Documents/GitHub/zotero_script.
+
+---
+class: middle
+
+### Run a Jupyter Notebook from That Folder and Look at the Output
+<hr>
+
+#### You can program Jupyter to load directly in a folder but, for now, the easiest way to run the Zotero script is to launch Jupyter using Anaconda Browser. The standard window comes up showing files and folders. Just click "Documents", then "Github", then "zotero_script" to get to the right location. Finally, clicking on the file called "Zotero.ipynb" will launch the notebook. 
+
+---
+class:middle
+
+### What is code literacy?
+<hr>
+#### 1. Literacy, Competency, Fluency, Skills 
+#### 2. Literacies: Plural and along a Continuum 
+#### 3. Digital and Technical Literacy
+#### 4. Code vs. Programming Literacy
+
+---
+class: middle
+
+### Teaching code
+
+#### 1. Large gap between parts and whole
+#### 2. Lot's of rote learning needed
+#### 3. Tension between understanding computation and "doing things with code"
+#### 4. Easiest methods are clickology and lecture
+#### 5. Some students need a lot of extra time
+
+---
+class: middle
+
+---
+# Code literacy learning goals
+
+### 1. Break out of memorizing procedures
+### 2. Learn syntax, types, and conventions by playing
+### 3. Slow down procedure to test undertsanding
+### 4. Place emphasis on habits of mind
+### 5. Express what's happenening, and why, using natural language
+
+---
+class: middle
+
+### Literate programming as a philosophy of documentation
+<hr>
+#### "The practitioner of literate programming can be regarded as an essayist, whose main concern is with exposition and excellence of style. ... He or she strives for a program that is comprehensible because its concepts have been introduced in an order that is best for human understanding, using a mixture of formal and informal methods that reinforce each other.""  --Donald Knuth
+
+
+---
+class: middle
+
+### Group Activity: Literate Coding
+<hr>
+
+#### Knuth's principle can be applied to code snippets and scripts, not just sophisticated computer programs. In three groups (3-4 people in each group), take a look at the Zotero snippet and see if you can understand how it works, as well as what assumptions it makes in order to prodice the line graph at the bottom of the Jupyter Notebook. You might consider starting with some of the questions from the "DH Code Analysis" written assignment that will be due in less than three weeks. 
+
+---
+class: middle
+### For quick access, these questions are:
+<hr>
+<ul>
+  <li>What does the script do? What kind of data or input does it 'expect'?</li>
+  <li>What inputs might cause it to error or perform in an unexpected way?</li>
+  <li>How does it handle exceptions? (I'll talk about exceptions in class)</li>
+  <li>What kinds of interpretive choices does the code make?</li>
+  <li>What kinds of simplifications or heuristics does it use?</li>
+  <li>Does the code seem to show bias or preference for any values or priorities?</li>
+  <li>Are there obvious alternatives to any of the choices made in the code snippet?</li>
+  <li>How might different choices affect the output?</li>
+</ul>
+
+---
+class: middle
+
+### Once You've Set Up the Notebook
+<hr>
+#### Run each block of code to make sure it works. You will need the Zotero API key, which I will provide in class. Once you've run the code, try printing one variable in a cell below the line graph. Is the value of the variable what you thought it would be?
+
+<br/>
+#### Don't worry if you don't fully understand the code, or you think you might be wrong about something. The goal is to stretch your understanding and see how much you can infer. As a group, try to generate at least 2-3 responses to the above prompts.
+
+    </textarea>
+    <script src="https://remarkjs.com/downloads/remark-latest.min.js">
+    </script>
+    <script>
+      var slideshow = remark.create();
+    </script>
+  </body>
+</html>
