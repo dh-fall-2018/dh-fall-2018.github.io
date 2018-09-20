@@ -61,7 +61,7 @@
 
 class: middle
 
-# Text Analysis Methods Workshop 4: 
+# Text Analysis Methods Workshop 4: Basics of Text Processing
 
 ### 
 
@@ -73,6 +73,194 @@ Clinical Assistant Professor of English and Director of Digital Media Lab
 University of Pittsburgh
 
 Fall 2018
+
+---
+class: middle
+
+# Tokenization
+<hr>
+#### Tokenization is the process of converting text into a structure so that each individual word is recognized by the program as a discrete unit. From our previous lessons on Python, we know that a string is the most common data type for text. Take a look at these two lines of code:
+
+<div class="hlcode">
+<div class="syntax"><pre><span></span><span class="n">mystring</span> <span class="o">=</span> <span class="s2">&quot;Creating bar charts with ambiguity and degrees 
+of uncertainty or other variables in them might cause 
+champions of legibility and transparency some unease&quot;</span>
+<span class="n">mystring</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span>
+</pre></div>
+</div>
+
+#### The second line of code instructs Python to return the first five elements of the variable mystring, so it returns 'Creat', which is characters 0,1,2,3, and 4.
+
+---
+class: middle
+
+# Tokenization
+<hr>
+#### With strings, the compiler has no information about where the first word ends and the second word begins. Instead, it indexes the characters. In contrast, if I have a list with each word stored as a separate string, mystring[:5] looks a little different:
+
+<div class="hlcode">
+<div class="syntax"><pre><span></span><span class="n">mystring2</span> <span class="o">=</span><span class="p">[</span><span class="s1">&#39;Creating&#39;</span><span class="p">,</span> <span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="s1">&#39;charts&#39;</span><span class="p">,</span> <span class="s1">&#39;with&#39;</span><span class="p">,</span> <span class="s1">&#39;ambiguity&#39;</span><span class="p">,</span> 
+<span class="s1">&#39;and&#39;</span><span class="p">,</span> <span class="s1">&#39;degrees&#39;</span><span class="p">,</span><span class="s1">&#39;of&#39;</span><span class="p">,</span> <span class="s1">&#39;uncertainty&#39;</span><span class="p">,</span> <span class="s1">&#39;or&#39;</span><span class="p">,</span> <span class="s1">&#39;other&#39;</span><span class="p">,</span> 
+<span class="s1">&#39;variables&#39;</span><span class="p">,</span> <span class="s1">&#39;in&#39;</span><span class="p">,</span> <span class="s1">&#39;them&#39;</span><span class="p">,</span> <span class="s1">&#39;might&#39;</span><span class="p">,</span> <span class="s1">&#39;cause&#39;</span><span class="p">,</span> <span class="s1">&#39;champions&#39;</span><span class="p">,</span> 
+<span class="s1">&#39;of&#39;</span><span class="p">,</span> <span class="s1">&#39;legibility&#39;</span><span class="p">,</span> <span class="s1">&#39;and&#39;</span><span class="p">,</span> <span class="s1">&#39;transparency&#39;</span><span class="p">,</span> <span class="s1">&#39;some&#39;</span><span class="p">,</span> <span class="s1">&#39;unease&#39;</span><span class="p">]</span>
+<span class="n">mystring2</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span>
+</pre></div>
+</div>
+#### What has happened here? Python can now read each word as a separate element in a list.
+---
+class: middle
+
+# Tokenization
+<hr>
+#### How do we get from a long string to a list of strings? One way is with a method called split(), which splits a string everywhere it finds the character you have told it to split on. If you don't supply a split character, it will default to the splitting on spaces. Try these bits of code:
+
+<pre>print(mystring.split())</pre>
+
+<pre>print(mystring.split("e"))</pre>
+
+#### (Methods are like functions but are based on object oriented programming, so that's a bigger topic than we can cover today.)
+
+
+---
+class: middle
+
+# Tokenization
+<hr>
+- #### There are, of course, other ways to tokenize. The big drawback of splitting on spaces is that lots of other things can mark the end of a token. For example, we might want to split hasn't into "has not" or "has n't" so that the has in hasn't gets counted. 
+
+- #### The two most common libraries for more sophisticated tokenization are NLTK and Spacy.  
+
+---
+class: middle
+
+# Installing Spacy
+<hr>
+#### In terminal (mac) or command line (windows), type the following command:
+
+<pre>conda install -c conda-forge spacy</pre>
+
+#### Then this to download the English language model:
+
+<pre>python3 -m spacy download en</pre>
+
+#### A window may pop up asking to to install:
+
+- #### XCode (mac) https://developer.apple.com/xcode/
+- #### Visual Studio Express (windows) https://www.visualstudio.com/vs/visual-studio-express/
+
+
+---
+class: middle
+
+# Tokenization in Spacy
+
+<hr>
+
+#### Spacy uses deep learning to infer tokens by analyzing patterns in a huge corpus of training data. The underlying algorithm is complex, and the results can be qute accurate:
+
+<div class="hlcode">
+<div class="syntax"><pre><span></span><span class="kn">import</span> <span class="nn">spacy</span>
+<span class="n">nlp</span> <span class="o">=</span> <span class="n">spacy</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;en&#39;</span><span class="p">)</span>
+<span class="n">mystring</span> <span class="o">=</span> <span class="s2">&quot;Creating bar charts with ambiguity and degrees of 
+uncertainty or other variables in them might cause champions 
+of legibility and transparency some unease&quot;</span>
+<span class="n">doc</span> <span class="o">=</span> <span class="n">nlp</span><span class="p">(</span><span class="n">mystring</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">([</span><span class="n">u</span><span class="o">.</span><span class="n">text</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">doc</span><span class="p">])</span>
+</pre></div>
+
+</div>
+
+#### Note: '[u.text for u in doc]' is an alternate way to execute a 'for' loop. 'u.,text' is another example of referencing an instance of an object. Working with spacy objects can be complicated at first, but you can pick up the basics fairly quickly, and you read in their documentation about how everything is structured. See https://spacy.io/api/doc
+
+---
+
+class: middle
+
+# Lemmatization
+<hr>
+
+- #### Linguists in particular are preoccupied with relating terms to their various forms or inflections. Stemming converts variants forms into their shared stem, so that organize, organizes, and organizing would become 'organiz-'. With lemmatization, you attempt to return the dictionary form of a word, which is known as the lemma. 
+
+- #### Organize, organizes, and organizing all share the lemma 'organize' even though organizaing doesn't have an e. The lemma for 'organization', meanwhile, is 'organization', because it's a different word in the dictionary (with organize as its root word). 
+
+---
+
+class: middle
+
+# Lemmatization with Spacy
+<hr>
+### As it turns out, Spacy's base function automatically lemmatizes strings, so all we have to do is acces the lemmas in our text object.
+
+<div class="hlcode">
+<div class="syntax"><pre><span></span><span class="kn">import</span> <span class="nn">spacy</span>
+<span class="n">nlp</span> <span class="o">=</span> <span class="n">spacy</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;en&#39;</span><span class="p">)</span>
+<span class="n">mystring</span> <span class="o">=</span> <span class="s2">&quot;Creating bar charts with ambiguity and degrees of 
+uncertainty or other variables in them might cause champions 
+of legibility and transparency some unease&quot;</span>
+<span class="n">doc</span> <span class="o">=</span> <span class="n">nlp</span><span class="p">(</span><span class="n">mystring</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">([</span><span class="n">u</span><span class="o">.</span><span class="n">lemma_</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">doc</span><span class="p">])</span>
+</pre></div>
+</div>
+
+
+
+---
+class: middle
+
+# Word Counts
+
+<hr>
+
+#### There are probably hundreds of ways to count words using code, but here's one easy one. Python comes with a library called collections, and in it is an object called Counter. I've already use it in class before, but let's looks at it again now that we know more about tokens and lemmas:
+
+<div class="hlcode">
+<div class="syntax"><pre><span></span><span class="kn">import</span> <span class="nn">spacy</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">Counter</span>
+<span class="n">nlp</span> <span class="o">=</span> <span class="n">spacy</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;en&#39;</span><span class="p">)</span>
+<span class="n">mystring</span> <span class="o">=</span> <span class="s2">&quot;Creating bar charts with ambiguity and degrees of uncertainty or other variables in them might cause champions of legibility and transparency some unease&quot;</span>
+<span class="n">doc</span> <span class="o">=</span> <span class="n">nlp</span><span class="p">(</span><span class="n">mystring</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">Counter</span><span class="p">([</span><span class="n">u</span><span class="o">.</span><span class="n">text</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">doc</span><span class="p">])</span><span class="o">.</span><span class="n">most_common</span><span class="p">())</span>
+</pre></div>
+</div>
+
+#### Note that 'Creating' and 'creating' would count as separate tokens if we passed one of each to Spacy. Text analysis algorithms often make everything lowercase before tokenizing to avoid this effect.
+
+---
+class: middle
+
+# How Counters work
+
+<hr>
+
+- #### Counters convert lists to dictionary-like objects. 
+- #### The keys of the dictionary are the lists contents, and the values are counts of each repeat item. 
+- #### Unlike dictionaries, Counters have built-in methods like most_common(), which returns a list of tuples for each key/value pair, in order of their counts. 
+
+---
+class: middle
+
+# Tying some things together
+
+<hr>
+
+#### Let's look back on what I've discussed in the first four weeks. We discussed:
+
+- #### strings, integers, and floats, and how to set and get values as variables 
+- #### lists, dictionaries, and tuples, and how they are different
+- #### the basics of using functions, loops, and conditionals and why they are used
+- #### the principles of literate programming 
+- #### tokenization and lemmatization
+- #### counting words in Python
+
+---
+class: middle
+
+# Tying some things together
+
+<hr>
+
+#### Now let's try turning back to the DH Code Analysis assignment (https://dh-fall-2018.matthew-lavin.com/assignments/code-analysis) to see how much more we can say about the example code I provided. In sets of 2-3 students, discuss which block or blocks you've looked at so far, what you think you know about the code, and what still seems unclear. We'll talk separately for 10-12 minutes and then share results as a group.
+
 
     </textarea>
     <script src="https://remarkjs.com/downloads/remark-latest.min.js">
