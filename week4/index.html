@@ -170,7 +170,9 @@ of legibility and transparency some unease&quot;</span>
 
 </div>
 
-#### Note: '[u.text for u in doc]' is an alternate way to execute a 'for' loop. 'u.,text' is another example of referencing an instance of an object. Working with spacy objects can be complicated at first, but you can pick up the basics fairly quickly, and you read in their documentation about how everything is structured. See https://spacy.io/api/doc
+#### Note: '[u.text for u in doc]' is an alternate way to execute a 'for' loop. 'u.text' is another example of referencing 
+      an instance of an object. Working with spacy objects can be complicated at first, but you can pick up the basics fairly quickly, 
+      and you can read in their documentation about how everything is structured. See https://spacy.io/api/doc
 
 ---
 
@@ -179,9 +181,13 @@ class: middle
 # Lemmatization
 <hr>
 
-- #### Linguists in particular are preoccupied with relating terms to their various forms or inflections. Stemming converts variants forms into their shared stem, so that organize, organizes, and organizing would become 'organiz-'. With lemmatization, you attempt to return the dictionary form of a word, which is known as the lemma. 
+- #### Linguists in particular are preoccupied with relating terms to their various forms or inflections. Stemming converts 
+      variants forms into their shared stem, so that organize, organizes, and organizing would become 'organiz-'. With lemmatization, 
+      you attempt to return the dictionary form of a word, which is known as the lemma. 
 
-- #### Organize, organizes, and organizing all share the lemma 'organize' even though organizaing doesn't have an e. The lemma for 'organization', meanwhile, is 'organization', because it's a different word in the dictionary (with organize as its root word). 
+- #### Organize, organizes, and organizing all share the lemma 'organize' even though organizing doesn't have an e. The lemma 
+      for 'organization', meanwhile, is 'organization', because it's a different word in the dictionary (with organize 
+      as its root word). 
 
 ---
 
@@ -211,7 +217,9 @@ class: middle
 
 <hr>
 
-#### There are probably hundreds of ways to count words using code, but here's one easy one. Python comes with a library called collections, and in it is an object called Counter. I've already use it in class before, but let's looks at it again now that we know more about tokens and lemmas:
+#### There are probably hundreds of ways to count words using code, but here's one easy one. Python comes with a library called 
+      collections, and in it is an object called Counter. I've already use it in class before, but let's looks at it again now 
+      that we know more about tokens and lemmas:
 
 <div class="hlcode">
 <div class="syntax"><pre><span></span><span class="kn">import</span> <span class="nn">spacy</span>
@@ -223,7 +231,8 @@ class: middle
 </pre></div>
 </div>
 
-#### Note that 'Creating' and 'creating' would count as separate tokens if we passed one of each to Spacy. Text analysis algorithms often make everything lowercase before tokenizing to avoid this effect.
+#### Note that 'Creating' and 'creating' would count as separate tokens if we passed one of each to Spacy. Text analysis algorithms 
+      often make everything lowercase before tokenizing to avoid this effect.
 
 ---
 class: middle
@@ -234,7 +243,8 @@ class: middle
 
 - #### Counters convert lists to dictionary-like objects. 
 - #### The keys of the dictionary are the lists contents, and the values are counts of each repeat item. 
-- #### Unlike dictionaries, Counters have built-in methods like most_common(), which returns a list of tuples for each key/value pair, in order of their counts. 
+- #### Unlike dictionaries, Counters have built-in methods like most_common(), which returns a list of tuples for each key/value pair, 
+      in order of their counts. 
 
 ---
 class: middle
@@ -259,7 +269,10 @@ class: middle
 
 <hr>
 
-#### Now let's try turning back to the DH Code Analysis assignment (https://dh-fall-2018.matthew-lavin.com/assignments/code-analysis) to see how much more we can say about the example code I provided. In sets of 2-3 students, discuss which block or blocks you've looked at so far, what you think you know about the code, and what still seems unclear. We'll talk separately for 10-12 minutes and then share results as a group.
+#### Now let's try turning back to the DH Code Analysis assignment (https://dh-fall-2018.matthew-lavin.com/assignments/code-analysis) 
+      to see how much more we can say about the example code I provided. In sets of 2-3 students, discuss which block or blocks 
+      you've looked at so far, what you think you know about the code, and what still seems unclear. We'll talk separately 
+      for 10-12 minutes and then share results as a group.
 
 
     </textarea>
