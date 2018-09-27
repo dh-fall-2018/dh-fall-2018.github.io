@@ -74,6 +74,230 @@ University of Pittsburgh
 
 Fall 2018
 
+---
+
+class: middle
+
+# Some More Review
+<hr>
+
+#### In this block of code: 
+
+<div class="highlight"><pre><span></span><span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Matt&#39;</span><span class="p">,</span> <span class="s1">&#39;Jane&#39;</span><span class="p">,</span> <span class="s1">&#39;Shankar&#39;</span><span class="p">,</span> <span class="s1">&#39;Ella&#39;</span><span class="p">,</span> <span class="s1">&#39;Jim&#39;</span><span class="p">,</span> <span class="s1">&#39;Aragorn&#39;</span><span class="p">]</span>
+<span class="n">longest_name</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">names</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">longest_name</span><span class="p">)</span>
+<span class="c1">#&gt;&gt;&gt;&gt; Shankar</span>
+<span class="n">names_and_lengths</span> <span class="o">=</span> <span class="p">[(</span><span class="n">i</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">i</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">names</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">names_and_lengths</span><span class="p">)</span>
+<span class="c1">#&gt;&gt;&gt;&gt; [(&#39;Matt&#39;, 4), (&#39;Jane&#39;, 4), (&#39;Shankar&#39;, 7), ...]</span>
+</pre></div>
+
+- #### What is type is the variable <strong>names</strong>?
+- #### What type is the variable  <strong>longest_name</strong>?
+- #### What type is the vriable <strong>names_and_lengths</strong>?
+
+---
+class: middle
+
+# Some More Review Continued
+<hr>
+- #### <strong>names</strong> is a list (of strings)
+- #### <strong>max()</strong> returns the largest int or longest string in a list
+- #### <strong>longest_name</strong> is a string
+- #### <strong>names_and_lengths</strong> is a list of tuples
+- #### each tuple in <strong>names_and_lengths</strong> contains a string and an integer
+
+---
+class: middle
+
+# Installing Spacy
+<hr>
+#### In terminal (mac) or command line (windows), type the following command:
+
+<pre>conda install -c conda-forge spacy</pre>
+
+#### Then this to download the English language model:
+
+<pre>python3 -m spacy download en</pre>
+
+#### or just
+
+<pre>python -m spacy download en</pre>
+
+#### A window may pop up asking to to install:
+
+- #### XCode (mac) https://developer.apple.com/xcode/
+- #### Visual Studio Express (windows) https://www.visualstudio.com/vs/visual-studio-express/
+
+#### Opening command line as admin in Windows: 
+#### https://www.youtube.com/watch?v=EohzkYPV6nI
+
+
+---
+class: middle
+
+# Tokenization in Spacy
+
+<hr>
+
+#### Reminder on Parsing Text
+
+<div class="hlcode">
+<div class="syntax"><pre><span></span><span class="kn">import</span> <span class="nn">spacy</span>
+<span class="n">nlp</span> <span class="o">=</span> <span class="n">spacy</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;en&#39;</span><span class="p">)</span>
+<span class="n">mystr</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;Creating bar charts with ambiguity and degrees 
+of uncertainty or other variables in them might cause champions 
+of legibility and transparency some unease.&quot;&quot;&quot;</span>
+<span class="n">doc</span> <span class="o">=</span> <span class="n">nlp</span><span class="p">(</span><span class="n">mystr</span><span class="p">)</span>
+</pre></div>
+</div>
+
+- #### <strong>doc</strong> is now an instance of a Python "nlp object"
+- #### Stored within <strong>doc</strong> are data such as lemmas, parts of speech, and any named entities that were recognized
+
+<hr>
+#### See also https://spacy.io/usage/linguistic-features#101-data
+
+---
+class: middle
+
+# Try Running This Code
+<hr>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+<span class="n">terms</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="o">.</span><span class="n">text</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">doc</span><span class="p">]</span>
+<span class="n">lemmas</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="o">.</span><span class="n">lemma_</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">doc</span><span class="p">]</span>
+<span class="n">pos_tags</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="o">.</span><span class="n">pos_</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">doc</span><span class="p">]</span>
+<span class="n">tags</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="o">.</span><span class="n">tag_</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">doc</span><span class="p">]</span>
+<span class="n">deps</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="o">.</span><span class="n">dep_</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">doc</span><span class="p">]</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;term&quot;</span><span class="p">:</span><span class="n">terms</span><span class="p">,</span> <span class="s2">&quot;lemma&quot;</span><span class="p">:</span><span class="n">lemmas</span><span class="p">,</span> 
+    <span class="s2">&quot;pos&quot;</span><span class="p">:</span><span class="n">pos_tags</span><span class="p">,</span> <span class="s2">&quot;tag&quot;</span><span class="p">:</span><span class="n">tags</span><span class="p">,</span> <span class="s2">&quot;dependency&quot;</span><span class="p">:</span> <span class="n">deps</span><span class="p">})</span>
+<span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">16</span><span class="p">]</span>
+</pre></div>
+
+#### Remember: <strong>[i.text for i in doc]</strong> is a shortcut way of saying: 
+
+- #### make a new list with the following contents
+- #### for each item in doc
+- #### fill the list with just the <strong>.text</strong> attribute of each item
+
+For more info on "list comprehensions," see https://www.pythonforbeginners.com/basics/list-comprehensions-in-python
+
+---
+class: middle
+
+# What Did We Just Do?
+<hr>
+- #### The block of code stores five different lists as variables: <strong>terms</strong>, <strong>lemma</strong>, <strong>pos_tags</strong>, <strong>tags</strong>, and <strong>deps</strong>
+- #### I then use pandas to create a spreadshee-like object called a DataFrame 
+- #### <strong>df.iloc[:16]</strong> tells Jupyter to display rows 0 through 15 of the DataFrame (and Jupyter knows how to diplay it in a user-friendly way)
+
+<hr>
+
+#### I'll say more about pandas later! More info at https://www.datacamp.com/community/tutorials/pandas-tutorial-dataframe-python
+
+---
+class: middle
+
+# POS vs. TAG
+<hr>
+- #### According to the spacy documentation, pos_ is "the simple part-of-speech tag" and tag_ is "the detailed part-of-speech tag." (see https://spacy.io/usage/spacy-101#annotations-pos-deps)
+
+- #### To get more information on any particular abbreviation, we can use the <strong>explain</strong> method. For example:
+
+<hr>
+<div class="highlight"><pre><span></span><span class="n">spacy</span><span class="o">.</span><span class="n">explain</span><span class="p">(</span><span class="s2">&quot;ADP&quot;</span><span class="p">)</span>
+</pre></div>
+
+#### Try this method with a few of the abbreviations from the previous DataFrame to get a sense of how spacy classifies parts-of-speech.
+
+---
+class: middle
+
+# Named Entities
+<hr>
+
+#### As with other spacy data, the entities are stored in a member variable of the <strong>nlp instance</strong>. However, NER data isn't stored by term because an entity can be several terms long. 
+
+<div class="highlight"><pre><span></span><span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;But Google is starting from behind. The company made \
+a late push into hardware, and Apple’s Siri, available on \
+iPhones, and Amazon’s Alexa software, which runs on its Echo \
+and Dot devices, have clear leads in consumer adoption.&quot;</span>
+<span class="n">doc</span> <span class="o">=</span> <span class="n">nlp</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">ent</span> <span class="ow">in</span> <span class="n">doc</span><span class="o">.</span><span class="n">ents</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">ent</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="n">ent</span><span class="o">.</span><span class="n">start_char</span><span class="p">,</span> <span class="n">ent</span><span class="o">.</span><span class="n">end_char</span><span class="p">,</span> <span class="n">ent</span><span class="o">.</span><span class="n">label_</span><span class="p">)</span>
+</pre></div>
+
+#### Instead, <strong>ents</strong> includes the text of each entity, its start position in the parsed text, its end position, and a label_ that tells us what category the entity belongs to.    
+
+---
+class: middle
+
+# Named Entity Labels
+
+<hr>
+- #### Spacy can recognize many entity types, such as people, organizations, countries, cities, states, works of art, and named languages.
+- #### For a full list, see https://spacy.io/usage/linguistic-features#entity-types
+- #### You can also train and/or update spacy using "gold data." See https://spacy.io/usage/linguistic-features#updating
+
+---
+class: middle
+
+# Noun Chunks
+
+<hr>
+
+#### Spacy can also use dependency data to give us Noun Chunks, which are "base noun phrases" or flat phrases that have a noun as their head.
+
+<div class="highlight"><pre><span></span><span class="nb">list</span><span class="p">(</span><span class="n">doc</span><span class="o">.</span><span class="n">noun_chunks</span><span class="p">)</span>
+</pre></div>
+
+#### Run this is your Jupyter Notebook to see the result. See also https://spacy.io/usage/linguistic-features#noun-chunks
+---
+class: middle
+
+# Visualizing Dependency Parsing
+<hr>
+#### The dependency visualizer shows "part-of-speech tags and syntactic dependencies."
+
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">spacy</span>
+<span class="kn">from</span> <span class="nn">spacy</span> <span class="kn">import</span> <span class="n">displacy</span>
+<span class="n">nlp</span> <span class="o">=</span> <span class="n">spacy</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;en&#39;</span><span class="p">)</span>
+<span class="n">doc1</span> <span class="o">=</span> <span class="n">nlp</span><span class="p">(</span><span class="sa">u</span><span class="s1">&#39;This is a sentence.&#39;</span><span class="p">)</span>
+<span class="n">displacy</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">doc1</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s1">&#39;dep&#39;</span><span class="p">,</span> <span class="n">jupyter</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</pre></div>
+
+#### Run this is your Jupyter Notebook to see the result. See also https://spacy.io/usage/visualizers#dep
+---
+class: middle
+
+# Displaying Entities
+<hr>
+
+#### Here's another interesting way of visualizing spacy data:
+
+<div class="highlight"><pre><span></span><span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;But Google is starting from behind. The company made \
+a late push into hardware, and Apple’s Siri, available on \
+iPhones, and Amazon’s Alexa software, which runs on its Echo \
+and Dot devices, have clear leads in consumer adoption.&quot;</span>
+<span class="n">doc</span> <span class="o">=</span> <span class="n">nlp</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+<span class="n">displacy</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">doc</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s1">&#39;ent&#39;</span><span class="p">,</span> <span class="n">jupyter</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</pre></div>
+
+#### Run this is your Jupyter Notebook to see the result
+
+---
+class: middle
+
+# Other Resources
+<hr>
+
+- #### Perhaps unsurprisingly, there are various ways to perform part-of-speech tagging and named entity recognition. 
+
+- #### Jockers and Kiriloff used the Stanford Tagger (https://nlp.stanford.edu/software/tagger.shtml) and there's also a Stanford Named Entity Recognizer (https://nlp.stanford.edu/software/CRF-NER.shtml). 
+
+- #### Google offers NER as a service, and Python's Natural Language Toolkit (NLTK) offers numerous ways to categorize and/or tag words (https://www.nltk.org/book/ch05.html). 
+
+
     </textarea>
     <script src="https://remarkjs.com/downloads/remark-latest.min.js">
     </script>

@@ -156,23 +156,21 @@ class: middle
 
 <hr>
 
-#### Spacy uses deep learning to infer tokens by analyzing patterns in a huge corpus of training data. The underlying algorithm is complex, and the results can be qute accurate:
+#### Spacy uses deep learning to infer tokens by analyzing patterns in a huge corpus of training data. The underlying algorithm is complex, and the results can be quite accurate:
 
 <div class="hlcode">
 <div class="syntax"><pre><span></span><span class="kn">import</span> <span class="nn">spacy</span>
 <span class="n">nlp</span> <span class="o">=</span> <span class="n">spacy</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;en&#39;</span><span class="p">)</span>
-<span class="n">mystring</span> <span class="o">=</span> <span class="s2">&quot;Creating bar charts with ambiguity and degrees of 
+<span class="n">mystring</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;Creating bar charts with ambiguity and degrees of 
 uncertainty or other variables in them might cause champions 
-of legibility and transparency some unease&quot;</span>
+of legibility and transparency some unease&quot;&quot;&quot;</span>
 <span class="n">doc</span> <span class="o">=</span> <span class="n">nlp</span><span class="p">(</span><span class="n">mystring</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">([</span><span class="n">u</span><span class="o">.</span><span class="n">text</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">doc</span><span class="p">])</span>
 </pre></div>
 
 </div>
 
-#### Note: '[u.text for u in doc]' is an alternate way to execute a 'for' loop. 'u.text' is another example of referencing 
-      an instance of an object. Working with spacy objects can be complicated at first, but you can pick up the basics fairly quickly, 
-      and you can read in their documentation about how everything is structured. See https://spacy.io/api/doc
+#### Note: '[u.text for u in doc]' is an alternate way to execute a 'for' loop. 'u.text' is another example of referencing an instance of an object. Working with spacy objects can be complicated at first, but you can pick up the basics fairly quickly, and you can read in their documentation about how everything is structured. See https://spacy.io/api/doc
 
 ---
 
