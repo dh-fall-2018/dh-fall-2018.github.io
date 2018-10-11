@@ -88,9 +88,11 @@ class: middle
 # Reminder: Corpus vs. Lexicon or Dictionary
 
 <hr>
-#### A lexicon or dictionary is a list of words or phrases that match some criteria, and/or a wordlist with information about those words. For example, SocialSent includes .tsv files, by decade, covering the years 1850-2000. 
+#### A lexicon or dictionary is a list of words or phrases that match some criteria, and/or a wordlist with information about those words. 
 <hr>
-#### Each .tsv has the format, <word>\t<mean_sentiment>\t<std_sentiment>\n where "mean_sentiment is the averaged inferred sentiment across bootstrap-sampled SentProp runs and std_sentiment is the standard deviation of these samples."
+#### For example, SocialSent includes .tsv files, by decade, covering the years 1850-2000. 
+<hr>
+#### Each .tsv has the format, &#60; word &#62;\t&#60; mean_sentiment &#62;\t&#60; std_sentiment &#62;\n where "mean_sentiment is the averaged inferred sentiment across bootstrap-sampled SentProp runs and std_sentiment is the standard deviation of these samples."
 <hr>
 ---
 class: middle
@@ -129,16 +131,16 @@ class: middle
 # An Activity
 
 <hr>
-### Let's break into groups of 2-3 students and try to load SocialSent adjective data and use it to generate a 'positivity score' for some texts.
+### Let's break into groups of 2-3 students and try to load SocialSent adjective data and use it to generate a 'positivity score' for some texts.   
 <hr>
 ---
 class: middle
 
 # Downloading the Repo 
-
-### I've created a starter repo with the SocialSent adjective data and a set of texts to analyze. Clone it here: https://github.com/dh-fall-2018/social-sent-activity
 <hr>
-#### The repository contains approximately 6400 opo-eds from _The New York Times_, all published between January and September 2018. There's a metadata.csv file with columns representing an <id>,<url>,<word_count>,<snippet>,<source>,< byline>,<byline_parsed>,<pub_date>, and <inferred_gender>. With the exception of <byline_parsed> and <inferred_gender>, the fields are all taken from _The New York Times_ Article API. <byline_parsed> attempts to isolate the author's name, and <inferred_gender> assigns a gender label using the R package 'gender', which returns a gender probability given a name input and a date. The inference is made by looking up census data. 
+#### I've created a starter repo with the SocialSent adjective data and a set of texts to analyze. Clone it here: https://github.com/dh-fall-2018/social-sent-activity
+<hr>
+#### The repository contains approximately 6400 opo-eds from _The New York Times_, all published between January and September 2018. There's a metadata.csv file with columns representing an &#60; id &#62;,&#60;  url &#62;,&#60; word_count &#62;,&#60; snippet &#62;,&#60; source &#62;,&#60; byline &#62;,&#60; byline_parsed &#62;,&#60; pub_date &#62;, and &#60; inferred_gender &#62;. With the exception of &#60; byline_parsed &#62; and &#60; inferred_gender &#62;, the fields are all taken from _The New York Times_ Article API. &#60; byline_parsed &#62; attempts to isolate the author's name, and &#60; inferred_gender &#62; assigns a gender label using the R package 'gender', which returns a gender probability given a name input and a date. The inference is made by looking up census data. 
 <hr>
 ---
 class: middle
@@ -149,9 +151,12 @@ class: middle
 - #### Loading a decade file from SocialSent into Python (as a dictionary)
 - #### Loading and tokenizing fifty texts (using spacy?)
 - #### Looping each text and checking each token against our dictionary
-- #### DEsigning the "positivity score"
+- #### Designing the "positivity score"
 - #### Saving an aggregated score for each file
 
+<hr>
+
+#### This is obviously a "challenge by choice" type of thing, but I want you to try, _really try_, to do each step. The goal here isn't necessarily to complete the task, but push yourself to think through the code will be a valuable learning experience. As you go, think about how this kind of coding gets done, as well as what it means to work with others on these kinds of tasks.
 <hr>
 ---
 class: middle
@@ -160,8 +165,10 @@ class: middle
 
 <hr>
 - #### How did it go? Did you complete the challenge?
+- #### Were some tasks more difficult than others? What kinds of concessions did you make?
 - #### What strategies were successful? Did you consult code from previous weeks' workshops? 
 - #### What did effective communication and teamwork feel like for this activity? 
+
 <hr>
 
 
