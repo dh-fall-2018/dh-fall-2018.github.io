@@ -61,7 +61,7 @@
 
 class: middle
 
-# Text Analysis Methods Workshop 8: 
+# Text Analysis Methods Workshop 8: Levenshtein distance and fuzzy matching
 
 ### 
 
@@ -73,6 +73,84 @@ Clinical Assistant Professor of English and Director of Digital Media Lab
 University of Pittsburgh
 
 Fall 2018
+
+---
+class:middle
+
+# Fuzzy Matching 
+<hr>
+### The computational technique of finding strings that match a pattern approximately rather than exactly.
+
+---
+class:middle
+
+# Levenshtein Distance 
+<hr>
+### One of several available algorithms that helps us quantify what a "close" match means.
+
+
+---
+class:middle
+
+# How it's done
+<hr>
+- #### Two words are compared
+- #### We attempt to transform word A to word B, letter by letter 
+- #### Every letter deletion costs one point; every insertion costs one point; every substitution costs one point
+- #### Levenshtein Distance is the smallest number of moves it would take to transform fully
+
+---
+class:middle
+
+# An example
+<hr>
+- #### Pineapple and Pinnacle are separated by a Levenshtein distance of three. To transform one to the other, I can make the following moves:
+
+  - #### substitute e for n (Pineacle)
+  - #### substitute p for c (Pineaple)
+  - #### insert another p (Pineapple)
+
+---
+class:middle
+
+# How it's used
+<hr>
+- #### Text searching (instead of exact matches return results resembling the word 'revolution')
+- #### Substitution (this term isn't in my dictionary; what is the closest dictionary word?)
+
+---
+class:middle
+
+# Other fuzzy matching techniques
+<hr>
+
+- #### N-gram matching
+- #### Jaro–Winkler distance
+- #### Pronunciation-based matching
+- #### Cosine similarity
+- #### Regular expressions
+- #### Needleman–Wunsch and Smith–Waterman algorithms (DNA)
+
+---
+class:middle
+
+# Using it in Python
+<hr>
+### install using the following command 
+
+<div class="highlight"><pre><span></span>conda install -c conda-forge python-levenshtein
+</pre></div>
+---
+class:middle
+
+# Using it in Python
+<hr>
+
+### Import and run like this:
+
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">Levenshtein</span> <span class="kn">import</span> <span class="n">distance</span>
+<span class="n">distance</span><span class="p">(</span><span class="s1">&#39;pinnacle&#39;</span><span class="p">,</span> <span class="s1">&#39;pineapple&#39;</span><span class="p">)</span>
+</pre></div>
 
     </textarea>
     <script src="https://remarkjs.com/downloads/remark-latest.min.js">
