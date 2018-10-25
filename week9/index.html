@@ -61,7 +61,7 @@
 
 class: middle
 
-# Text Analysis Methods Workshop 9: 
+# Text Analysis Methods Workshop 9: Collocations and N-Grams
 
 ### 
 
@@ -73,6 +73,135 @@ Clinical Assistant Professor of English and Director of Digital Media Lab
 University of Pittsburgh
 
 Fall 2018
+
+---
+class:middle
+
+# N-Grams
+<hr>
+1. ### Defined as "a contiguous sequence of n items from a given sample of text or speech"
+2. ### Written out as Bigrams (pairs of words), trigrams (sets of three), 4-grams and numerical after 
+
+---
+class:middle
+
+# N-Grams use a sliding window
+<hr>
+
+### This means words are repeated 
+
+---
+class:middle
+
+# An Example
+<hr>
+
+<div class="highlight"><pre><span></span><span class="n">mytext</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;I traveled to Afghanistan in 2015 to film </span>
+<span class="s2">a documentary about the United States drone war. </span>
+<span class="s2">When my production partner and I inquired about </span>
+<span class="s2">kidnapping insurance, we were told that it </span>
+<span class="s2">would cost more than $20,000 to cover the director </span>
+<span class="s2">of photography and me. We couldn’t afford </span>
+<span class="s2">such a high premium and declined the offer.&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">spacy</span>
+<span class="n">nlp</span> <span class="o">=</span> <span class="n">spacy</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;en&#39;</span><span class="p">)</span>
+<span class="n">doc</span> <span class="o">=</span> <span class="n">nlp</span><span class="p">(</span><span class="n">mytext</span><span class="p">)</span>
+</pre></div>
+
+---
+class:middle
+
+# Trigrams by Hand
+<hr>
+<div class="highlight"><pre><span></span><span class="c1">#omit punctuation and extra spaces, </span>
+<span class="c1">#and make everything lowercase</span>
+<span class="n">words</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">doc</span> <span class="k">if</span> <span class="n">i</span><span class="o">.</span><span class="n">pos_</span> <span class="o">!=</span><span class="s1">&#39;PUNCT&#39;</span>
+<span class="n">words</span> <span class="o">=</span> <span class="p">[</span><span class="n">i </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">words</span> <span class="k">if</span> <span class="n">i</span><span class="o">.</span><span class="n">pos_</span> <span class="o">!=</span> <span class="s1">&#39;SPACE&#39;</span><span class="p">]</span>
+
+<span class="c1">#we create trigrams, an empty list</span>
+<span class="n">trigrams</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">words</span><span class="p">)):</span>
+    <span class="c1"># i here will be a number between 0 and 56</span>
+    <span class="c1"># tri is a list of three words: </span>
+    <span class="c1"># the current word and the two words after it</span>
+    <span class="n">tri</span> <span class="o">=</span> <span class="n">words</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">3</span><span class="p">]</span> 
+    <span class="c1"># at the  end of the list, words[i:i+3] will look </span>
+    <span class="c1"># two words ahead and find 1. a two-word pair since </span>
+    <span class="c1"># the second to last word has only one word after it</span>
+    <span class="c1"># and 2. the very last word alone </span>
+    <span class="c1"># since nothing comes after it </span>
+    <span class="c1"># we want to ignore those two cases, so ...</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">tri</span><span class="p">)</span><span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="n">trigrams</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tri</span><span class="p">)</span>
+        
+<span class="c1">#trigrams is now a list of lists</span>
+<span class="n">trigrams</span>
+</pre></div>
+
+---
+class:middle
+
+# N-grams in nltk
+<hr>
+
+<div class="highlight"><pre><span></span><span class="c1">#to do this we need nltk installed</span>
+<span class="kn">from</span> <span class="nn">nltk.util</span> <span class="kn">import</span> <span class="n">ngrams</span>
+<span class="n">trigrams</span><span class="o">=</span><span class="n">ngrams</span><span class="p">(</span><span class="n">words</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="c1"># this will return a list of tuples </span>
+<span class="c1"># instead of a list of lists</span>
+<span class="nb">list</span><span class="p">(</span><span class="n">trigrams</span><span class="p">)</span>
+</pre></div>
+
+#### To install nltk, check out this link: https://anaconda.org/anaconda/nltk
+
+
+---
+class:middle
+
+# Collocations
+<hr>
+
+#### Implements scoring based on Church and Hanks, 1900 (http://www.aclweb.org/anthology/J90-1003)
+<hr> 
+#### "Word probabilities P(x) and P(y) are estimated by counting the number of observations of x and y in a corpus, f(x) and f(y), and normalizing by N, the size of the corpus. Joint probabilities, P(x,y), are estimated by counting the number of times that x is followed by y in a window of w words, fw (x,y), and normalizing by N." (23)
+
+
+---
+class:middle
+
+# Example Usage
+<hr>
+
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">nltk</span>
+<span class="kn">from</span> <span class="nn">nltk.collocations</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">bigram_measures</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">collocations</span><span class="o">.</span><span class="n">BigramAssocMeasures</span><span class="p">()</span>
+<span class="n">finder</span> <span class="o">=</span> <span class="n">BigramCollocationFinder</span><span class="o">.</span><span class="n">from_words</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
+<span class="n">finder</span><span class="o">.</span><span class="n">nbest</span><span class="p">(</span><span class="n">bigram_measures</span><span class="o">.</span><span class="n">pmi</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+</pre></div>
+
+#### Note: This works much better with more text!
+
+---
+class:middle
+
+# Window Size
+<hr>
+
+#### "The window size parameter allows us to look at different scales. Smaller window sizes will identify fixed expressions (idioms such as bread and butter) and other relations that hold over short ranges; larger window sizes will highlight semantic concepts and other relationships that hold over larger scales." (23)
+
+---
+class:middle
+
+# Example Usage with window_size
+<hr>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">nltk</span>
+<span class="kn">from</span> <span class="nn">nltk.collocations</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">bigram_measures</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">collocations</span><span class="o">.</span><span class="n">BigramAssocMeasures</span><span class="p">()</span>
+<span class="n">finder</span> <span class="o">=</span> <span class="n">BigramCollocationFinder</span><span class="o">.</span><span class="n">from_words</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="n">window_size</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+<span class="n">finder</span><span class="o">.</span><span class="n">nbest</span><span class="p">(</span><span class="n">bigram_measures</span><span class="o">.</span><span class="n">pmi</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+</pre></div>
+
 
     </textarea>
     <script src="https://remarkjs.com/downloads/remark-latest.min.js">
