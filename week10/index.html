@@ -6,7 +6,7 @@
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="pygments.css" type="text/css" />
     <style>
-
+      pre { padding: 7px;}
       th {color: white; background-color: black; padding-top: 7px; padding-bottom: 7px;}
       td {padding: 3px; }
       table { width: 100%; border-collapse: collapse;}
@@ -51,7 +51,7 @@
       }
       .middle {
         
-        background-image: linear-gradient(#E1E1E1, #68AA5E 45%);
+        background-image: linear-gradient(#E1E1E1, #47807A 45%);
       }
     </style>
   </head>
@@ -63,7 +63,7 @@ class: middle
 
 # Text Analysis Methods Workshop 10: 
 
-### 
+### The vector space model and cosine similarity
 
 <hr>
 Matthew J. Lavin
@@ -73,6 +73,216 @@ Clinical Assistant Professor of English and Director of Digital Media Lab
 University of Pittsburgh
 
 Fall 2018
+
+---
+class: middle
+
+# We've Already Seen the Vectoir Space Model!
+<hr>
+- #### Topic modeling uses this approach
+- #### Most machione learning models convert terms to feature vectors
+
+---
+class: middle
+
+# Each Row is a Text Document
+<hr>
+<table>
+  <thead><th>Document</th><th>______</th><th>______</th><th>______</th></thead>
+  <tr><td>Document 1</td><td></td><td></td><td></td></tr>
+<tr><td>Document 2</td><td></td><td></td><td></td></tr>
+<tr><td>Document 3</td><td></td><td></td><td></td></tr>
+<tr><td>Document 4</td><td></td><td></td><td></td></tr>
+</table>
+
+---
+class: middle
+
+# Each Column is a Word
+<hr>
+<table>
+  <thead><th>Document</th><th>__am__</th><th>__are__</th><th>_area_</th></thead>
+  <tr><td>Document 1</td><td></td><td></td><td></td></tr>
+<tr><td>Document 2</td><td></td><td></td><td></td></tr>
+<tr><td>Document 3</td><td></td><td></td><td></td></tr>
+<tr><td>Document 4</td><td></td><td></td><td></td></tr>
+</table>
+---
+class: middle
+
+# Each Table Cell Records How Many Times a Word Appears in a Document
+<hr>
+
+<table>
+  <thead><th>Document</th><th>__am__</th><th>__are__</th><th>_area_</th></thead>
+  <tr><td>Document 1</td><td>7</td><td>9</td><td>1</td></tr>
+<tr><td>Document 2</td><td>6</td><td>7</td><td>0</td></tr>
+<tr><td>Document 3</td><td>4</td><td>14</td><td>0</td></tr>
+<tr><td>Document 4</td><td>15</td><td>0</td><td>2</td></tr>
+</table>
+
+
+---
+class: middle
+
+# Some Aspects of the Vector Space Model
+
+<hr>
+
+- #### Word order in documents is not modeled
+- #### The order of the columns doesn't matter as long as we know which feature is which
+- #### So and Long use 0 and 1 for the cells (word is either present or absent)
+- #### We could do the same with N-grams or parts of speech
+- #### You can even do this on images with numbers representing pixel colors
+
+---
+class: middle
+
+# A Note on Vectors
+
+<hr>
+
+- #### Vector is a mathematical concept (magnitude and direction)
+- #### We can do mathematical operations on vectors (linear algebra)
+
+---
+class: middle
+
+# For Example: Cosine Similarity Tells Us How Similar Two Vectors Are
+
+<hr>
+- #### One of many simple computations
+- #### Seems to work well on text data because document length doesn't matter
+
+---
+class: middle
+
+# The Math is Easy Enough to Try Out 
+
+#### But you never need to do this yourself again! Python has a cosine similarity function you can use
+<hr>
+
+<table>
+  <thead><th>Document</th><th>__am__</th><th>__are__</th><th>_area_</th></thead>
+  <tr><td>Document 1</td><td>7</td><td>9</td><td>1</td></tr>
+<tr><td>Document 2</td><td>6</td><td>7</td><td>0</td></tr>
+</table>
+
+---
+class: middle
+
+### 1. Add Up Values for Each Document Row (We'll Use This Later)
+<hr>
+
+<table>
+  <thead><th>Document</th><th>__am__</th><th>__are__</th><th>_area_</th><th>Sum</th></thead>
+  <tr><td>Document 1</td><td>7</td><td>9</td><td>1</td><td>131</td></tr>
+<tr><td>Document 2</td><td>6</td><td>7</td><td>0</td><td>85</td></tr>
+</table>
+
+---
+class: middle
+
+### 2. Multiply Values by Column
+<hr>
+
+<table>
+  <thead><th>Document</th><th>__am__</th><th>__are__</th><th>_area_</th></thead>
+  <tr><td>Document 1</td><td>7</td><td>9</td><td>1</td></tr>
+<tr><td>Document 2</td><td>6</td><td>7</td><td>0</td></tr>
+
+<tr><td>Count Product</td><td>42</td><td>63</td><td>0</td></tr>
+
+</table>
+
+---
+class: middle
+
+### 3. Square the Count Products
+<hr>
+
+<table>
+  <thead><th>Document</th><th>__am__</th><th>__are__</th><th>_area_</th></thead>
+  <tr><td>Document 1 Squared</td><td>49</td><td>81</td><td>1</td></tr>
+<tr><td>Document 2 Squared</td><td>36</td><td>49</td><td>0</td></tr>
+
+<tr><td>Count Product</td><td>42</td><td>63</td><td>0</td></tr>
+
+</table>
+
+---
+class: middle
+
+### 4. Sum Up All the Count Products
+<hr>
+
+<table>
+  <thead><th>Document</th><th>__am__</th><th>__are__</th><th>_area_</th><th>Sum</th></thead>
+  <tr><td>Count Product</td><td>42</td><td>63</td><td>0</td><td>105</td></tr>
+</table>
+
+---
+class: middle
+
+### 5. Get the Square Root of Each Row Sum from Step 1
+<hr>
+
+<table>
+  <thead><th>Document</th><th>__am__</th><th>__are__</th><th>_area_</th><th>Sum</th><th>Square Root</th></thead>
+  <tr><td>Document 1</td><td>7</td><td>9</td><td>1</td><td>131</td><td>11.44552314</td></tr>
+<tr><td>Document 2</td><td>6</td><td>7</td><td>0</td><td>85</td><td>9.219544457</td></tr>
+</table>
+
+---
+class: middle
+
+### 6. Multiply the Two Square Roots Together 
+<hr>
+
+<table>
+  <thead><th>Document</th><th>__am__</th><th>__are__</th><th>_area_</th><th>Sum</th><th>Square Root</th></thead>
+  <tr><td>Document 1</td><td>7</td><td>9</td><td>1</td><td>131</td><td>11.44552314</td></tr>
+<tr><td>Document 2</td><td>6</td><td>7</td><td>0</td><td>85</td><td>9.219544457</td></tr>
+<tr><td>Square Root Product</td><td></td><td></td><td></td><td></td><td>105.5225094</td></tr>
+</table>
+
+---
+class: middle
+
+### 7. Divide the Count Product Sum by the Square Root Product
+<hr>
+<table>
+<tr><td>Count Product</td><td>105</td></tr>
+<tr><td>Square Root Product</td><td>105.5225094</td></tr>
+<tr><td>Result</td><td>0.99504836</td></tr>
+</table>
+
+---
+class: middle
+
+# Let's Look at this All at Once
+<hr>
+
+<table>
+  <thead><th>Document</th><th>__am__</th><th>__are__</th><th>_area_</th><th>Sum</th><th>Square Root</th></thead>
+  <tr><td>Document 1</td><td>7</td><td>9</td><td>1</td><td>131</td><td>11.44552314</td></tr>
+<tr><td>Document 2</td><td>6</td><td>7</td><td>0</td><td>85</td><td>9.219544457</td></tr>
+<tr><td>Square Root Product</td><td></td><td></td><td></td><td></td><td>105.5225094</td></tr>
+
+<tr><td>Count Product</td><td>42</td><td>63</td><td>0</td><td>105</td><td>0.99504836</td></tr>
+</table>
+
+---
+class: middle
+
+# And Try it in a Jupyter Notebook
+<hr>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">spatial</span>
+<span class="n">document1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">document2</span> <span class="o">=</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">result</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">spatial</span><span class="o">.</span><span class="n">distance</span><span class="o">.</span><span class="n">cosine</span><span class="p">(</span><span class="n">document1</span><span class="p">,</span> <span class="n">document2</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
 
     </textarea>
     <script src="https://remarkjs.com/downloads/remark-latest.min.js">
