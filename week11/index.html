@@ -80,7 +80,7 @@ class: middle
 # What is TF-IDF?
 
 <hr>
-
+#### TF-IDF stands for Term Frequency - Inverse Document Frequency. Instead of representing a term in a document by its raw frequency (number of occurrences) or its relative frequency (term count divided by document length), each term is weighted by dividing the term frequency by the (1) frequency of the word in the corpus, or (2) the number of documents in the corpus that contain the word. 
 <hr>
 
 ---
@@ -88,9 +88,127 @@ class: middle
 
 # How Does the Math Work?
 
-<hr>
 
-<hr>
+---
+class: middle
+
+# An Example: One Obituary among Many
+
+<div>
+<table border="1" class="dataframe">
+<thead>
+  <tr style="text-align: right;">
+    <th title="Term">Term</th>
+    <th title="Count">Count</th>
+    <th title="DF">DF</th>
+    <th title="Smoothed-IDF">Smoothed-IDF</th>
+    <th title="TF-IDF">TF-IDF</th>
+    
+    </tr>
+</thead>
+<tbody>
+<tr>
+<td>afternoon</td>
+<td>1</td>
+<td>66</td>
+<td>2.70066923</td>
+<td>2.70066923</td>
+
+</tr>
+<tr>
+<td>against</td>
+<td>1</td>
+<td>189</td>
+<td>1.65833778</td>
+<td>1.65833778</td>
+
+</tr>
+<tr>
+<td>age</td>
+<td>1</td>
+<td>224</td>
+<td>1.48926145</td>
+<td>1.48926145</td>
+
+</tr>
+<tr>
+<td>ago</td>
+<td>1</td>
+<td>161</td>
+<td>1.81776551</td>
+<td>1.81776551</td>
+
+</tr>
+<tr>
+<td>air</td>
+<td>1</td>
+<td>80</td>
+<td>2.51091269</td>
+<td>2.51091269</td>
+
+</tr>
+<tr>
+<td>all</td>
+<td>1</td>
+<td>310</td>
+<td>1.16556894</td>
+<td>1.16556894</td>
+
+</tr>
+<tr>
+<td>american</td>
+<td>1</td>
+<td>277</td>
+<td>1.27774073</td>
+<td>1.27774073</td>
+
+</tr>
+<tr>
+<td>an</td>
+<td>1</td>
+<td>352</td>
+<td>1.03889379</td>
+<td>1.03889379</td>
+
+</tr>
+<tr>
+<td>and</td>
+<td>13</td>
+<td>364</td>
+<td>1.00546449</td>
+<td>13.07103843</td>
+
+</tr>
+<tr>
+<td>around</td>
+<td>2</td>
+<td>149</td>
+<td>1.89472655</td>
+<td>3.78945311</td>
+</tr>
+
+<tr>
+<td>as</td>
+<td>2</td>
+<td>357</td>
+<td>1.02482886</td>
+<td>2.04965772</td>
+</tr>
+
+<tr>
+<td>ascension</td>
+<td>1</td>
+<td>6</td>
+<td>4.95945170</td>
+<td>4.95945170</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+
+Download a complete excel file on [Github](https://github.com/mjlavin80/tf-idf-programming-historian/blob/master/bly_tfidf_all.xlsx?raw=true)
 
 ---
 class: middle
