@@ -88,6 +88,16 @@ class: middle
 
 # How Does the Math Work?
 
+<hr>
+
+#### The formula is: tf-idf(d, t) = tf(t) * idf(d, t) 
+#### tf(t) is the term frequency of a term, either a raw count or a normalized value
+#### idf(d, t)  is log [ n / df(d, t) ] + 1 where _log_ equals the natural logarithm of the derived value
+#### n is the total number of documents
+#### df is the number of documents containing the term (t)
+
+<hr>
+
 
 ---
 class: middle
@@ -208,7 +218,25 @@ class: middle
 
 
 
-Download a complete excel file on [Github](https://github.com/mjlavin80/tf-idf-programming-historian/blob/master/bly_tfidf_all.xlsx?raw=true)
+Download a complete excel file on [Github](https://github.com/dh-fall-2018/tfidf-explore/blob/master/bly_tfidf_all.xlsx?raw=true)
+
+---
+class: middle
+
+# In Python 
+
+<hr>
+<div class="highlight"><pre><span></span><span class="c1"># all_docs can be any list of strings,</span>
+<span class="c1"># each item representing a document </span>
+<span class="n">a</span> <span class="o">=</span> <span class="s1">&#39;The once ruddy face was puffy and pale&#39;</span>
+<span class="n">b</span> <span class="o">=</span> <span class="s1">&#39;The gray hair was straight and thin&#39;</span>
+<span class="n">c</span> <span class="o">=</span> <span class="s1">&#39;His dark brown eyes looked fixed, and he seemed \</span>
+<span class="s1">to be daydreaming&#39;</span>
+<span class="n">d</span> <span class="o">=</span> <span class="s1">&#39;his figure was trim and erect&#39;</span>
+
+<span class="n">all_docs</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">,</span><span class="n">d</span><span class="p">]</span>
+</pre></div>
+<hr>
 
 ---
 class: middle
@@ -217,6 +245,45 @@ class: middle
 
 <hr>
 
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">TfidfVectorizer</span>
+<span class="c1"># TfidfVectorizer is a class, so I instantiate it </span>
+<span class="c1"># with specific pararmeters as &#39;vectorizer&#39;</span>
+<span class="c1"># I then run the object&#39;s fit_transform() </span>
+<span class="c1"># method on my list of strings (all_docs)</span>
+<span class="c1"># The stored variable X is output of the </span>
+<span class="c1"># fit_transform() method </span>
+<span class="n">vectorizer</span> <span class="o">=</span> <span class="n">TfidfVectorizer</span><span class="p">(</span><span class="n">max_df</span><span class="o">=.</span><span class="mi">65</span><span class="p">,</span> <span class="n">min_df</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> 
+  <span class="n">stop_words</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">use_idf</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">vectorizer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">all_docs</span><span class="p">)</span>
+</pre></div>
+
+<hr>
+
+---
+class: middle
+
+# In Python 
+
+<hr>
+<div class="highlight"><pre><span></span><span class="c1"># The fit_transform() method converts the list of </span>
+<span class="c1"># strings to a sparse matrix of TF-IDF values</span>
+<span class="c1"># The toarray method converts a numpy array, which </span>
+<span class="c1"># makes it easier to indpect every values including the zeros </span>
+<span class="n">myarray</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
+<span class="c1"># prints the first row of results</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+<hr>
+
+---
+class: middle
+
+# In Python 
+
+<hr>
+<div class="highlight"><pre><span></span><span class="c1"># You can merge the results for each doc</span>
+<span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">vectorizer</span><span class="o">.</span><span class="n">get_feature_names</span><span class="p">(),</span> <span class="n">myarray</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+</pre></div>
 <hr>
 
 ---
@@ -225,8 +292,9 @@ class: middle
 # Exploratory Applications
 
 <hr>
-
+#### TF-IDF is often used to simply produce re-ranked term lists for a large group of documents 
 <hr>
+See https://github.com/dh-fall-2018/tfidf-explore/blob/master/ExploreFiles.ipynb
 
 ---
 class: middle
@@ -234,6 +302,8 @@ class: middle
 # Using It As a Preprocessing Step
 
 <hr>
+- #### Many machine learning algorithms begin by vectorizing text and running TF-IDF
+- #### For example, I could next run k-means clustering and split the obits into three groups to see what lands where 
 
 <hr>
 
@@ -243,25 +313,9 @@ class: middle
 # Using it To Make Feature Lists
 
 <hr>
-
-<hr>
-
-
----
-class: middle
-
-# Common Flavors of TF-IDF
-
-<hr>
-
-<hr>
-
----
-class: middle
-
-# On N-Grams or Other Features
-
-<hr>
+- #### To derive a feature set, I might run TF-IDF on a group of documents about a subject
+- #### For example, obits in one pile, non-obits in another
+- #### Then I can take the top N TF-IDF terms (say 50) and see which novels use those words the most 
 
 <hr>
 
@@ -285,7 +339,8 @@ class: middle
 <hr>
 - #### User supplies a number of clusters
 - #### The model tries various groupings, calculates a "centroid" of the data (a multidimensional center) ands then measures the mean distance from the centroid
-- #### More coherent groups have lower "intertia" 
+- #### More coherent groups have lower "inertia" 
+- #### See https://github.com/dh-fall-2018/tfidf-explore/blob/master/ExploreFiles.ipynb
 <hr>
 
     </textarea>
