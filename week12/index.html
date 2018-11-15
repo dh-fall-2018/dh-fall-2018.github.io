@@ -61,7 +61,7 @@
 
 class: middle
 
-# Text Analysis Methods Workshop 12: 
+# Text Analysis Methods Workshop 12: Topic Models and Word2vec
 
 ### 
 
@@ -73,6 +73,68 @@ Clinical Assistant Professor of English and Director of Digital Media Lab
 University of Pittsburgh
 
 Fall 2018
+
+---
+class: middle
+
+# Topic Models
+
+<hr>
+
+- #### Infers or models "topics" -- latent subject matter of collections of documents
+- #### Calculates a finite number of topics based on user input
+- #### Each document is represented as a "bag of words" 
+- #### Each topic represents the probability that a given term will appear in it
+- #### Each document in the corpus is fitted to each topic
+
+---
+class: middle
+
+# The Most Common Algorithm
+<hr>
+
+- #### Assign a random seed word to all topics
+- #### For each document, look at all topics so far and calculate which topics occur in this document (word by word)
+- #### Then calculate which other topics "like" this word?
+- #### Calculate the product of document-likes-topic and topic-likes-word
+- #### Assign word to best fitting topic ... adds to the strength of the next iteration of that word being assigned to the same topic
+- #### Repeat until the results stabilize
+
+---
+class: middle
+
+# Running in Python 
+
+<hr>
+
+- #### We build the code using Scikit Learn
+- #### About seven steps, and steps 1-5 are the same as TF-IDF
+- #### See https://github.com/dh-fall-2018/jupyter-notebooks-text-analysis/blob/master/lda-example.ipynb
+
+---
+class: middle
+
+# Word2vec
+
+<hr>
+
+- #### Sometimes called word embeddings
+- #### Uses deep learning or neural network to model which words are related to other words
+- #### Represents "related" as words that appear in similar contexts to one another
+- #### Data just stores a word and the words around it
+- #### Give the model a word, and it will predict other words with similar before and after words
+
+---
+class: middle
+
+# In Python
+
+<hr>
+
+- #### Implemented in a library called gensim
+- #### Can install with ```conda install -c anaconda gensim```
+- #### See https://radimrehurek.com/gensim/models/word2vec.html 
+- #### See also https://github.com/dh-fall-2018/jupyter-notebooks-text-analysis/blob/master/word2vec-example.ipynb
 
     </textarea>
     <script src="https://remarkjs.com/downloads/remark-latest.min.js">
