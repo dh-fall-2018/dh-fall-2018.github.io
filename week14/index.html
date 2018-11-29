@@ -61,9 +61,9 @@
 
 class: middle
 
-# Text Analysis Methods Workshop 14: 
+# Text Analysis Methods Workshop 14
 
-### 
+### Machine Learning Classification: Logistic and Linear Regression
 
 <hr>
 Matthew J. Lavin
@@ -74,6 +74,67 @@ University of Pittsburgh
 
 Fall 2018
 
+---
+class: middle
+
+# Regression
+
+<hr>
+- #### Statistical model for inferring the relationships among variables 
+- #### Builds a model or estimater by constructing a "line of regression" from observed samples
+- #### Supervised learning, requires training data 
+- #### One or more dependent variables 
+- #### One or more independent variables
+
+<hr>
+
+---
+class: middle
+
+# Logistic regression
+<hr>
+- #### Models a binary, dependent variable given one or more independent variables
+- #### For example, given someone's income, IQ, number of pets, etc., I want to predict "did they go to college?" (y/n)
+- #### Calculates a logit for each variable in all training data and then applies coefficient to the observed variable in the test case
+- #### Converts logit back to a probability using inverse natural logarithm 
+<hr>
+
+---
+class: middle
+
+# Logistic regression
+<hr>
+- #### Good for DH because coefficient lists (variable and affect on the model) are easy to read
+- #### You don't need to know which features are important ahead of time
+- #### Need ample training data
+- #### Term frequencies are the most common features (vsm)
+- #### Could theoretically work on any data expressed as vectors 
+<hr>
+
+---
+class: middle
+
+# Linear regression
+<hr>
+- #### Models a scalar, dependent variable given one or more independent variables
+- #### For example, given a person's heart rate, weight, etc. what is their most likely age
+- #### Need training data but too much might be bad
+- #### Calculates a line of best fit
+- #### Can return feature coefficients like logistic regression
+- #### Can also return an intercept variable, the expected mean of X when Y is zero 
+- #### Independent variables can be term frequencies here as well
+<hr>
+
+---
+class: middle
+
+# In Python
+<hr>
+- #### Both are done the same way using scikit learn
+- #### To build on the k-means clustering example, all we need are labels (in a Python list) 
+- #### We also want to divide our data into training and test sets
+
+<hr>
     </textarea>
     <script src="https://remarkjs.com/downloads/remark-latest.min.js">
     </script>
